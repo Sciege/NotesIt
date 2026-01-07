@@ -145,11 +145,17 @@ class _HomePageState extends State<HomePage> {
                           //   borderRadius: BorderRadius.circular(30),
                           // ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFF202020), width: 0),
+                            borderSide: BorderSide(
+                              color: Color(0xFF202020),
+                              width: 0,
+                            ),
                             borderRadius: BorderRadius.circular(30),
                           ),
                           border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFF202020), width: 0),
+                            borderSide: BorderSide(
+                              color: Color(0xFF202020),
+                              width: 0,
+                            ),
                             borderRadius: BorderRadius.circular(30),
                           ),
                           contentPadding: EdgeInsets.symmetric(horizontal: 10),
@@ -183,8 +189,8 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 20),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.3,
-              child: ValueListenableBuilder<Box<hive.Note>>(
-                valueListenable: Hive.box<hive.Note>('notes').listenable(),
+              child: ValueListenableBuilder<Box>(
+                valueListenable: Hive.box('notes').listenable(),
                 builder: (context, box, _) {
                   if (box.isEmpty) {
                     return const Center(
@@ -195,15 +201,28 @@ class _HomePageState extends State<HomePage> {
                     );
                   }
 
-                  // CORRECT MAPPING: Iterate over keys to build domain models
-                  final domainNotes = box.keys.map((key) {
-                    final hiveNote = box.get(key)!;
-                    return domain.Note(
-                      key: key,
-                      title: hiveNote.title,
-                      content: hiveNote.content,
-                      isPinned: hiveNote.isPinned,
-                    );
+                  ///
+                  // // CORRECT MAPPING: Iterate over keys to build domain models
+                  // final domainNotes = box.keys.map((key) {
+                  //   final hiveNote = box.get(key)!;
+                  //   return domain.Note(
+                  //     key: key,
+                  //     title: hiveNote.title,
+                  //     content: hiveNote.content,
+                  //     isPinned: hiveNote.isPinned,
+                  //   );
+                  // }).toList();
+                  ///
+                  final domainNotes = box.toMap().entries.map((entry) {
+                    final hiveKey = entry.key as int;
+                    final data = Map<String, dynamic>.from(entry.value as Map);
+
+                    return hive.NoteModel(
+                      id: hiveKey, // ✅ inject Hive key
+                      isPinned: data['isDone'] ?? false,
+                      title: data['title'] ?? '',
+                      content: data['content'],
+                    ).toEntity();
                   }).toList();
 
                   // this is the holder of the notes so call it or set it

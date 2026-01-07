@@ -10,13 +10,13 @@ import '../../domain/repositories/note_repository.dart';
 import '../mapper/note_mapper.dart';
 
 class NoteRepositoryData implements NoteRepository {
-  final NoteLocalDataSourceImpl noteLocalDataSourceImpl;
+  final NoteLocalDataSource noteLocalDataSource;
 
-  NoteRepositoryData({required this.noteLocalDataSourceImpl});
+  NoteRepositoryData({required this.noteLocalDataSource});
 
   Future<Result<List<Note>>> getNote() async {
     try {
-      final localModel = await noteLocalDataSourceImpl.getNote();
+      final localModel = await noteLocalDataSource.getNote();
       final domainModel = localModel.map((note) => note.toEntity()).toList();
       return Result.ok(domainModel);
     } on UnexpectedFailure {
@@ -29,7 +29,7 @@ class NoteRepositoryData implements NoteRepository {
   Future<Result<void>> addNote(Note note) async {
     try {
       final model = note.toModel();
-      await noteLocalDataSourceImpl.addNote(model);
+      await noteLocalDataSource.addNote(model);
       return Result.ok(null);
     } on UnexpectedFailure {
       return Result.error(UnexpectedFailure('Unexpected Error'));
@@ -41,7 +41,7 @@ class NoteRepositoryData implements NoteRepository {
   Future<Result<void>> updateNote(Note note) async {
     final model = note.toModel();
     try {
-      await noteLocalDataSourceImpl.updateNote(model);
+      await noteLocalDataSource.updateNote(model);
       return Result.ok(null);
     } on UnexpectedFailure {
       return Result.error(UnexpectedFailure('Unexpected Error'));
@@ -53,7 +53,7 @@ class NoteRepositoryData implements NoteRepository {
   Future<Result<void>> deleteNote(Note note) async {
     final model = note.toModel();
     try {
-      noteLocalDataSourceImpl.deleteNote(model);
+      noteLocalDataSource.deleteNote(model);
       return Result.ok(null);
     } on UnexpectedFailure {
       return Result.error(UnexpectedFailure('Unexpected Error'));

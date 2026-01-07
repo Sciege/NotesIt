@@ -18,6 +18,7 @@ import 'package:notes_it/injection.dart' as di;
 import 'package:go_router/go_router.dart';
 
 import 'features/notes/domain/entities/note.dart' as domain;
+import 'features/notes/presentation/bloc/note_bloc.dart';
 import 'features/private_notes/domain/entities/priv_notes.dart'
 as domainPrivNotes;
 import 'features/todo_list/domain/entities/todolist.dart' as domainTodolist;
@@ -30,7 +31,7 @@ void main() async {
   //Hive.registerAdapter(TodolistModelAdapter());
   Hive.registerAdapter(PrivNotesAdapter());
   //  await Hive.deleteBoxFromDisk('notes'); //to be deleted in prod
-  await Hive.deleteBoxFromDisk('todos'); //to be deleted in prod
+  //await Hive.deleteBoxFromDisk('todos'); //to be deleted in prod
   //  await Hive.deleteBoxFromDisk('priv_notes'); //to be deleted in prod
 
   // await Hive.openBox<TodolistModel>('todos');
@@ -102,13 +103,21 @@ class _MyAppState extends State<MyApp> {
   );
 
   Widget build(BuildContext context) {
-    return BlocProvider(  // ADD THIS
-      create: (context) => di.sl<TodolistBloc>(),  // ADD THIS
-      child: MaterialApp.router(  // WRAP MaterialApp.router
+    return MultiBlocProvider(
+     // create: (context) => di.sl<TodolistBloc>(),
+       providers: [
+         BlocProvider(
+           create: (context) => di.sl<TodolistBloc>(),
+         ),
+         BlocProvider(
+           create: (context) => di.sl<NoteBloc>(),
+         ),
+       ],
+      child: MaterialApp.router(
         theme: AppTheme.darkTheme,
         routerConfig: _router,
         debugShowCheckedModeBanner: false,
       ),
-    );  // ADD THIS
+    );
   }
 }

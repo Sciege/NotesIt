@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:notes_it/features/notes/data/mapper/note_mapper.dart';
 import 'package:notes_it/features/notes/data/models/note_model.dart' as hive;
 import 'package:notes_it/features/notes/domain/entities/note.dart' as domain;
 import 'package:go_router/go_router.dart';
+import 'package:notes_it/features/notes/presentation/bloc/note_bloc.dart';
 
 class NotesPage extends StatefulWidget {
   final domain.Note? note;
@@ -67,22 +69,25 @@ class _NotesPageState extends State<NotesPage> {
     //   return;
     // }
 
-    final box = Hive.box<hive.Note>('notes');
+    //final box = Hive.box<hive.Note>('notes');
 
     if (widget.note != null) {
       final updatedDomainNote = widget.note!.copyWith(
         title: titleText,
         content: contentText,
       );
-      final hiveNote = updatedDomainNote.toEntity();
-      box.put(widget.note!.key, hiveNote);
+      //
+      // final hiveNote = updatedDomainNote.toEntity();
+      // box.put(widget.note!.key, hiveNote);
+      context.read<NoteBloc>().add(UpdateNoteEvent(updatedDomainNote));
     } else {
       final newDomainNote = domain.Note(
         title: titleText.isNotEmpty ? titleText : "Untitled Note",
-        content: contentText,
+        content: contentText, id: null,
       );
-      final hiveNote = newDomainNote.toEntity();
-      box.add(hiveNote);
+      context.read<NoteBloc>().add(AddNoteEvent(newDomainNote));
+      //final hiveNote = newDomainNote.toEntity();
+      //box.add(hiveNote);
     }
 
     context.go('/');

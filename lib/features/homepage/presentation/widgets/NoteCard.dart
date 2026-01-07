@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../notes/data/mapper/note_mapper.dart';
 import '../../../notes/domain/entities/note.dart' as domain;
 import '../../../notes/data/models/note_model.dart' as hive;
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../../../notes/presentation/bloc/note_bloc.dart';
+import '../../../todo_list/presentation/bloc/todolist_bloc.dart';
 
 class Notecard extends StatelessWidget {
   const Notecard({super.key, required this.note});
@@ -53,14 +57,17 @@ class Notecard extends StatelessWidget {
                 final updatedDomainNote = note.copyWith(
                   isPinned: !note.isPinned,
                 );
-                final hiveNote = updatedDomainNote.toEntity();
-                Hive.box<hive.Note>('notes').put(note.key, hiveNote);
+                // final hiveNote = updatedDomainNote.toEntity();
+                // Hive.box<hive.Note>('notes').put(note.key, hiveNote);
+                context.read<NoteBloc>().add(UpdateNoteEvent(updatedDomainNote));
               },
             ),
             IconButton(
               icon: const Icon(Icons.delete, color: Colors.grey),
               onPressed: () {
-                Hive.box<hive.Note>('notes').delete(note.key);
+                context.read<NoteBloc>().add(DeleteNoteEvent(note));
+
+                // Hive.box<hive.Note>('notes').delete(note.key);
               },
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:notes_it/core/error/failures.dart';
 import 'package:notes_it/core/result/result.dart';
+import 'package:notes_it/core/usecases/usecase.dart';
 import 'package:notes_it/features/notes/domain/entities/note.dart';
 
 abstract class NoteRepository {

@@ -13,7 +13,7 @@ class GetNote  {
   GetNote(this.noteRepository);
 
   @override
-  Future<Result<List<Note>>> call() async {
+  Future<Result<List<Note>>> call(NoParams params) async {
     return await noteRepository.getNote();
   }
 }
