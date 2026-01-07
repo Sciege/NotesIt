@@ -11,7 +11,7 @@ import 'package:notes_it/features/notes/domain/usecases/get_note.dart';
 import 'package:notes_it/features/notes/domain/usecases/update_note.dart';
 import 'package:notes_it/features/notes/presentation/bloc/note_bloc.dart';
 
-// Feature: Todo List
+// Feature: TodoList
 import 'package:notes_it/features/todo_list/data/datasources/todolist_local_data_source.dart';
 import 'package:notes_it/features/todo_list/data/repositories/todolist_repository_data.dart';
 import 'package:notes_it/features/todo_list/domain/repositories/todolist_repository.dart';
@@ -20,6 +20,8 @@ import 'package:notes_it/features/todo_list/domain/usecases/delete_todo.dart';
 import 'package:notes_it/features/todo_list/domain/usecases/get_todos.dart';
 import 'package:notes_it/features/todo_list/domain/usecases/update_todo.dart';
 import 'package:notes_it/features/todo_list/presentation/bloc/todolist_bloc.dart';
+
+// Freature PrivNotes
 
 final sl = GetIt.instance;
 
