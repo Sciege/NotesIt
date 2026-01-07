@@ -5,7 +5,7 @@ part 'note.freezed.dart'; // dart run build_runner build --delete-conflicting-ou
 @freezed
 abstract class Note with _$Note {
   const factory Note({
-    dynamic key,
+    required int? id,
     required String title,
     required String content,
     @Default(false) bool isPinned,

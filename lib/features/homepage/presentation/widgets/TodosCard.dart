@@ -39,7 +39,7 @@ class TodosCard extends StatelessWidget {
             final hiveKey = entry.key as int;
             final data = Map<String, dynamic>.from(entry.value as Map);
 
-            return hiveTodo.TodolistModel(
+            return hiveTodo.NoteModel(
               id: hiveKey, // ✅ inject Hive key
               todoList: data['todoList'] ?? '',
               description: data['description'] ?? '',

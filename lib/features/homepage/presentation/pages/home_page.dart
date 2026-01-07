@@ -7,7 +7,7 @@ import 'package:notes_it/features/homepage/presentation/widgets/TodosCard.dart';
 
 //notes
 import '../../../notes/data/mapper/note_mapper.dart';
-import '../../../notes/data/models/note.dart' as hive;
+import '../../../notes/data/models/note_model.dart' as hive;
 import '../../../notes/domain/entities/note.dart' as domain;
 
 //todolist

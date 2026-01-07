@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:notes_it/features/notes/data/mapper/note_mapper.dart';
-import 'package:notes_it/features/notes/data/models/note.dart' as hive;
+import 'package:notes_it/features/notes/data/models/note_model.dart' as hive;
 import 'package:notes_it/features/notes/domain/entities/note.dart' as domain;
 import 'package:go_router/go_router.dart';
 

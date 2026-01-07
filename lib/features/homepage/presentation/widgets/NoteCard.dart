@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../notes/data/mapper/note_mapper.dart';
 import '../../../notes/domain/entities/note.dart' as domain;
-import '../../../notes/data/models/note.dart' as hive;
+import '../../../notes/data/models/note_model.dart' as hive;
 import 'package:hive_flutter/hive_flutter.dart';
 
 class Notecard extends StatelessWidget {

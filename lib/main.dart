@@ -13,7 +13,7 @@ import 'package:notes_it/features/todo_list/presentation/pages/todos_page.dart';
 import 'package:notes_it/features/todo_list/presentation/provider/todolist_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'features/notes/data/models/note.dart';
+import 'features/notes/data/models/note_model.dart';
 import 'package:notes_it/injection.dart' as di;
 import 'package:go_router/go_router.dart';
 
@@ -26,7 +26,7 @@ import 'features/todo_list/presentation/bloc/todolist_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive.registerAdapter(NoteAdapter());
+  //Hive.registerAdapter(NoteAdapter());
   //Hive.registerAdapter(TodolistModelAdapter());
   Hive.registerAdapter(PrivNotesAdapter());
   //  await Hive.deleteBoxFromDisk('notes'); //to be deleted in prod
@@ -34,7 +34,7 @@ void main() async {
   //  await Hive.deleteBoxFromDisk('priv_notes'); //to be deleted in prod
 
   // await Hive.openBox<TodolistModel>('todos');
-  await Hive.openBox<Note>('notes');
+ // await Hive.openBox<Note>('notes');
   await Hive.openBox<PrivNotes>('priv_notes');
   await di.init();
 
