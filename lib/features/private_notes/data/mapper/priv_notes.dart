@@ -1,5 +1,5 @@
 import '../../domain/entities/priv_notes.dart' as domain;
-import '../models/priv_notes.dart' as data;
+import '../models/priv_notes_model.dart' as data;
 
 // Hive to Freezed (Reading from DB)
 extension NoteHiveMapper on data.PrivNotes {

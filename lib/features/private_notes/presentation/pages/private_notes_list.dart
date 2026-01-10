@@ -6,7 +6,7 @@ import 'package:notes_it/features/private_notes/presentation/pages/private_notes
 import 'package:notes_it/features/todo_list/presentation/pages/todolist_page.dart';
 import 'package:notes_it/features/private_notes/presentation/widgets/NoteCard.dart';
 
-import '../../data/models/priv_notes.dart' as hive;
+import '../../data/models/priv_notes_model.dart' as hive;
 
 import '../../domain/entities/priv_notes.dart' as domain;
 import 'package:go_router/go_router.dart';

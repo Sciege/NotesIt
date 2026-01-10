@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'priv_notes.dart';
+part of 'priv_notes_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator

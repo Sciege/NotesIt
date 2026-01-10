@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:notes_it/features/private_notes/data/models/priv_notes.dart';
+import 'package:notes_it/features/private_notes/data/models/priv_notes_model.dart';
 import 'package:notes_it/features/todo_list/data/models/todolist_model.dart';
 import 'package:notes_it/features/app_theme.dart';
 import 'package:notes_it/features/homepage/presentation/pages/home_page.dart';

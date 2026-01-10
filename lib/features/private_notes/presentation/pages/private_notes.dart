@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../../data/mapper/priv_notes.dart';
-import '../../data/models/priv_notes.dart' as hive;
+import '../../data/models/priv_notes_model.dart' as hive;
 import '../../domain/entities/priv_notes.dart' as domain;
 import 'package:go_router/go_router.dart';
 
