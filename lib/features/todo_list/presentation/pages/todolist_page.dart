@@ -63,7 +63,7 @@ class _TodolistPageState extends State<TodolistPage> {
         );
         return;
       } else {
-        context.go('/');
+        context.go('/todos_page');
         return;
       }
     }
@@ -103,7 +103,7 @@ class _TodolistPageState extends State<TodolistPage> {
       context.read<TodolistBloc>().add(AddTodoEvent(newDomainTodolist));
     }
 
-    context.go('/');
+    context.go('/todos_page');
   }
 
   @override

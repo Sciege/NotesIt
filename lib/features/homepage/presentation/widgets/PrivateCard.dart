@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Privatecard extends StatefulWidget {
-  Privatecard({
+  const Privatecard({
     super.key,
     required this.screenHeight,
     required this.screenWidth,
@@ -9,8 +9,8 @@ class Privatecard extends StatefulWidget {
     required this.onUnlock,
   });
 
-  final screenHeight;
-  final screenWidth;
+  final double screenHeight;
+  final double screenWidth;
 
   //final Color lockColor;
   final Future<void> Function() onUnlock;
@@ -23,10 +23,9 @@ class _PrivatecardState extends State<Privatecard> {
   Color lockColor = Colors.grey;
 
   Future<void> _handleTap() async {
-
     setState(() => lockColor = const Color(0xFFF6D14C));
 
-        try {
+    try {
       await widget.onUnlock();
     } finally {
       //go back to grey even if auth fails or is cancelled
@@ -36,10 +35,8 @@ class _PrivatecardState extends State<Privatecard> {
     }
   }
 
-  // Color lockColor = Colors.grey;
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       height: widget.screenHeight * 0.3,
       width: widget.screenWidth * 0.41,
@@ -49,23 +46,11 @@ class _PrivatecardState extends State<Privatecard> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Center(
-        child: GestureDetector(
-          onTapDown: (_) {
-            setState(() {
-              lockColor = const Color(0xFFF6D14C); // Yellow
-            });
-          },
-          onTapCancel: () {
-            setState(() {
-              lockColor = Colors.grey;
-            });
-          },
-          child: IconButton(
-            color: lockColor,
-            onPressed: _handleTap,
-            iconSize: 30,
-            icon: Icon(Icons.lock_outline),
-          ),
+        child: IconButton(
+          color: lockColor,
+          onPressed: _handleTap,
+          iconSize: 30,
+          icon: const Icon(Icons.lock_outline),
         ),
       ),
     );

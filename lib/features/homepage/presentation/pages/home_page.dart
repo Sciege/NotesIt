@@ -10,11 +10,6 @@ import '../../../notes/data/mapper/note_mapper.dart';
 import '../../../notes/data/models/note_model.dart' as hive;
 import '../../../notes/domain/entities/note.dart' as domain;
 
-//todolist
-import '../../../todo_list/data/mapper/todolist_mapper.dart';
-import '../../../todo_list/data/models/todolist_model.dart' as hiveTodo;
-import '../../../todo_list/domain/entities/todolist.dart' as domainTodo;
-
 // auth
 import '../../../../core/services/local_auth_service.dart';
 import 'package:go_router/go_router.dart';
@@ -29,9 +24,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-String _searchQuery = '';
-
 class _HomePageState extends State<HomePage> {
+  String _searchQuery = '';
   Color lockColor = Colors.grey;
   int _currentTab = 0; // Changes when clicked
   final ScrollController _scrollController = ScrollController();
@@ -219,7 +213,7 @@ class _HomePageState extends State<HomePage> {
 
                     return hive.NoteModel(
                       id: hiveKey, // ✅ inject Hive key
-                      isPinned: data['isDone'] ?? false,
+                      isPinned: data['isPinned'] ?? false,
                       title: data['title'] ?? '',
                       content: data['content'],
                     ).toEntity();

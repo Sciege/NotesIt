@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes_it/features/private_notes/data/models/priv_notes_model.dart';
-import 'package:notes_it/features/todo_list/data/models/todolist_model.dart';
 import 'package:notes_it/features/app_theme.dart';
 import 'package:notes_it/features/homepage/presentation/pages/home_page.dart';
 import 'package:notes_it/features/homepage/presentation/pages/notes_page.dart';
@@ -10,10 +9,7 @@ import 'package:notes_it/features/private_notes/presentation/pages/private_notes
 import 'package:notes_it/features/private_notes/presentation/pages/private_notes_list.dart';
 import 'package:notes_it/features/todo_list/presentation/pages/todolist_page.dart';
 import 'package:notes_it/features/todo_list/presentation/pages/todos_page.dart';
-import 'package:notes_it/features/todo_list/presentation/provider/todolist_provider.dart';
-import 'package:provider/provider.dart';
 
-import 'features/notes/data/models/note_model.dart';
 import 'package:notes_it/injection.dart' as di;
 import 'package:go_router/go_router.dart';
 
@@ -102,6 +98,7 @@ class _MyAppState extends State<MyApp> {
     ],
   );
 
+  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
      // create: (context) => di.sl<TodolistBloc>(),

@@ -5,7 +5,6 @@ import 'package:notes_it/features/todo_list/presentation/widgets/TodoCard.dart';
 import '../../data/models/todolist_model.dart' as hiveTodo;
 import '../../domain/entities/todolist.dart' as domainTodo;
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 class TodosPage extends StatefulWidget {
   const TodosPage({super.key});
@@ -51,19 +50,19 @@ class _TodosPageState extends State<TodosPage> {
                   print('Number of todos: ${box.length}');
                   print('All keys: ${box.keys.toList()}');
 
-                  final domainTodos = box.keys.map((key) {
-                    final hiveTodo_ = box.get(key)!;
-                    return domainTodo.Todolist(
-                      id: key,
-                      todolist: hiveTodo_.todoList,
-                      description: hiveTodo_.description,
-                      isDone: hiveTodo_.isDone,
-                    );
+                  final domainTodos = box.toMap().entries.map((entry) {
+                    final hiveKey = entry.key as int;
+                    final data = Map<String, dynamic>.from(entry.value as Map);
+
+                    return hiveTodo.TodolistModel(
+                      id: hiveKey,
+                      todoList: data['todoList'] ?? '',
+                      description: data['description'] ?? '',
+                      isDone: data['isDone'] ?? false,
+                    ).toEntity();
                   }).toList();
 
-                  final todos = domainTodos
-                      .where((todo) => !todo.isDone || todo.isDone)
-                      .toList();
+                  final todos = domainTodos.toList();
 
                   if (todos.isEmpty) {
                     return const Center(
